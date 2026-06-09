@@ -85,10 +85,7 @@ jobs:
         - name: Create release
           uses: softprops/action-gh-release@v2
           with:
-            files: |
-              artifacts/SystemRay-Win.exe/SystemRay-Win.exe
-              artifacts/SystemRay-Linux/SystemRay-Linux
-              artifacts/SystemRay-Mac/SystemRay-Mac
+            files: artifacts/**/*
 
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
