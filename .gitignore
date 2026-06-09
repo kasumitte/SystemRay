@@ -1,0 +1,9 @@
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Session
+.env
+data/
+logs/

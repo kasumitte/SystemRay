@@ -1,0 +1,37 @@
+{
+    "en": {
+        "theme": "Theme",
+        "theme_opt": ["dark", "system", "light"],
+        "lang": "Language",
+        "lang_opt": ["en", "ru"],
+        "prompt": "Custom Prompt",
+        "api_key": "API Key",
+        "scan": "Scan",
+        "cpu": "CPU",
+        "ram": "RAM Usage",
+        "disk": "Disk Usage",
+        "scan_proc": "Scanning",
+        "clean": "Clean Selected",
+        "done": "Done!",
+        "chat_entr": "Ask Anything",
+        "save": "Save"
+    },
+
+    "ru": {
+        "theme": "Тема",
+        "theme_opt": ["темная", "системная", "светлая"],
+        "lang": "Язык",
+        "lang_opt": ["en", "ru"],
+        "prompt": "Кастомный Промпт",
+        "api_key": "API Ключ",
+        "scan": "Скан",
+        "cpu": "ЦПУ",
+        "ram": "ОЗУ",
+        "disk": "Диск",
+        "scan_proc": "Сканирование",
+        "clean": "Очистить выбранное",
+        "done": "Готово!",
+        "chat_entr": "Спрашивайте что угодно",
+        "save": "Сохранить"
+    }
+}
