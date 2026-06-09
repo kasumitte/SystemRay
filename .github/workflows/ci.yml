@@ -36,18 +36,15 @@ jobs:
           include:
             - os: windows-latest
               artifact_name: SystemRay-Win.exe
-              pyinstaller_cmd: pyinstaller --onefile --windowed --add-data "assets;assets" --add-data "languages;languages" --icon=assets/main_icon.ico main.py
-              output_bin: dist/main.exe
+              pyinstaller_cmd: pyinstaller --onefile --windowed --name=SystemRay-Win --add-data "assets;assets" --add-data "languages;languages" --icon=assets/main_icon.ico main.py
 
             - os: ubuntu-latest
               artifact_name: SystemRay-Linux
-              pyinstaller_cmd: pyinstaller --onefile --add-data "assets:assets" --add-data "languages:languages" main.py
-              output_bin: dist/main
+              pyinstaller_cmd: pyinstaller --onefile --name=SystemRay-Linux --add-data "assets:assets" --add-data "languages:languages" main.py
 
             - os: macos-latest
               artifact_name: SystemRay-Mac
-              pyinstaller_cmd: pyinstaller --onefile --windowed --add-data "assets:assets" --add-data "languages:languages" main.py
-              output_bin: dist/main
+              pyinstaller_cmd: pyinstaller --onefile --windowed --name=SystemRay-Mac --add-data "assets:assets" --add-data "languages:languages" main.py
       
       steps:
         - name: Checkout repo
@@ -63,11 +60,7 @@ jobs:
           run: uv sync --all-groups
 
         - name: Build app
-          run: uv run ${{ matrix.output_bin }} dist/${{ matrix.artifact_name }}
-
-        - name: Rename bin
-          shell: bash
-          run: mv ${{ matrix.output_bin }} dist/${{ matrix.artifact_name }}
+          run: uv run ${{ matrix.pyinstaller_cmd }}
 
         - name: Upload built bin
           uses: actions/upload-artifact@v4
