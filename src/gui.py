@@ -2,6 +2,8 @@ import customtkinter as ctk
 from PIL import Image
 import queue
 from src.metrics import bytes_to_readable
+import os
+from utils.worker import resource_path
 
 
 class HomePage(ctk.CTkFrame):
@@ -131,8 +133,10 @@ class Sidebar(ctk.CTkFrame):
         super().__init__(parent, corner_radius=0)
         self.controller = controller
         
-        chat_icon = ctk.CTkImage(light_image=Image.open("assets/chat_icon_b.png"),
-                                 dark_image=Image.open("assets/chat_icon_l.png"), size=(20, 20))
+        b_chat = resource_path(os.path.join("assets", "chat_icon_b.png"))
+        l_chat = resource_path(os.path.join("assets", "chat_icon_l.png"))
+        chat_icon = ctk.CTkImage(light_image=Image.open(b_chat),
+                                 dark_image=Image.open(l_chat), size=(20, 20))
         
         chat_btn = ctk.CTkButton(self, image=chat_icon, fg_color="transparent", hover_color="#333333",
                                  text="", width=40, command=lambda: controller.toggle_chat())
@@ -142,8 +146,10 @@ class Sidebar(ctk.CTkFrame):
                             command=lambda: controller.show_page(HomePage))     
         btn.pack(pady=10, padx=5)
         
-        gear_icon = ctk.CTkImage(light_image=Image.open("assets/gear_icon_b.png"),
-                                 dark_image=Image.open("assets/gear_icon_l.png"), size=(20, 20))
+        gear_b = resource_path(os.path.join("assets", "gear_icon_b.png"))
+        gear_l = resource_path(os.path.join("assets", "gear_icon_l.png"))
+        gear_icon = ctk.CTkImage(light_image=Image.open(gear_b),
+                                 dark_image=Image.open(gear_l), size=(20, 20))
         
         set_btn = ctk.CTkButton(self, fg_color="transparent", hover_color="#333333", image=gear_icon, text="", 
                                 width=40, command=lambda: controller.show_page(SettingsPage))
@@ -215,7 +221,8 @@ class ChatBar(ctk.CTkFrame):
         self.chat_entry.pack(fill="x", pady=(0, 10), padx=10)
         self.chat_entry.bind("<Return>", lambda e: self.send_message())
         
-        send_img = ctk.CTkImage(Image.open("assets/send_btn.png"), size=(20, 20))
+        send_img_p = resource_path(os.path.join("assets", "send_btn.png"))
+        send_img = ctk.CTkImage(Image.open(send_img_p), size=(20, 20))
         send_btn = ctk.CTkButton(self, image=send_img, width=30, text="", 
                                  height=30, corner_radius=20, command=lambda: self.send_message())
         send_btn.pack(side="right", pady=2, padx=2)
@@ -250,7 +257,8 @@ class MainWindow(ctk.CTk):
         super().__init__()
         self.geometry("1280x800")
         self.title("SystemRay")
-        self.iconbitmap("assets/main_icon.ico")
+        icon_path = resource_path(os.path.join("assets", "main_icon.ico"))
+        self.iconbitmap(icon_path)
         self.translations = translations
         self.lang = lang
         self.theme = theme

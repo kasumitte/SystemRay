@@ -1,13 +1,16 @@
 from src.gui import MainWindow
-from utils.worker import Worker
+from utils.worker import Worker, resource_path
 from src.config import Conf
 from src.database import init_db, init_default_settings, get_settings_by_key
 import json
 import queue
+import os
 import customtkinter as ctk
 
 def main():
-    with open("languages/translations.json", encoding="utf-8") as f:
+    path_to_json = resource_path(os.path.join("languages", "translations.json"))
+    
+    with open(path_to_json, encoding="utf-8") as f:
         TRANSLATIONS = json.load(f)
     config = Conf
     config.init_dirs()

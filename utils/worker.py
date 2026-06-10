@@ -1,6 +1,8 @@
 import threading
 import asyncio
 import sys
+import os
+import sys
 import keyring
 from queue import Queue
 import logging
@@ -36,6 +38,14 @@ file_log.setFormatter(format)
 logger.addHandler(console)
 logger.addHandler(file_log)
 
+def resource_path(relative_path):
+    """ Get an absolute path to the resource """
+    try:
+        base_path = sys._MEIPASS # type: ignore
+    except Exception:
+        base_path = os.path.abspath(".")
+        
+    return os.path.join(base_path, relative_path)
 
 class Worker:
     def __init__(self, task_queue: Queue, result_queue: Queue, db_path: Path):
